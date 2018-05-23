@@ -1,0 +1,52 @@
+{
+  "name": "kget",
+  "version": "1.0.0",
+  "description": "Uses one or more keys to retrieve a value from a Map, Object, or other collection. Supports nesting, loose key matching, and more.",
+  "keywords": [
+    "get",
+    "nested",
+    "key",
+    "chain",
+    "value",
+    "collection",
+    "array",
+    "iterator",
+    "map",
+    "object",
+    "set",
+    "typed array",
+    "WeakMap"
+  ],
+  "author": "John Lamansky",
+  "license": "MIT",
+  "homepage": "https://github.com/lamansky/kget",
+  "repository": "lamansky/kget",
+  "main": "index.js",
+  "files": [],
+  "engines": {
+    "node": ">=8.3.0"
+  },
+  "dependencies": {
+    "arrify": "^1.0.1",
+    "entries-iterator": "^1.5.0",
+    "equals": "^1.0.5",
+    "is-instance-of": "^1.0.1",
+    "otherwise": "^1.0.0",
+    "sbo": "^1.1.0",
+    "xfn": "^1.0.0"
+  },
+  "devDependencies": {
+    "eslint-config-lamansky": "^1.0.0",
+    "is-array-with": "^1.0.0",
+    "mocha": "^5.2.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "eslintConfig": {
+    "extends": "lamansky",
+    "env": {
+      "mocha": true
+    }
+  }
+}
