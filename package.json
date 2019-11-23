@@ -1,6 +1,6 @@
 {
   "name": "kget",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Uses one or more keys to retrieve a value from a Map, Object, or other collection. Supports nesting, loose key matching, and more.",
   "keywords": [
     "get",
