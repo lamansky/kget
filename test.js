@@ -12,12 +12,20 @@ describe('get()', function () {
     assert.strictEqual(get([['value']], [0, 0]), 'value')
   })
 
+  it('should fetch Array value using index chain string', function () {
+    assert.strictEqual(get([['value']], '0.0', {split: true, numerifyIndexes: true}), 'value')
+  })
+
   it('should fetch Object value using single key', function () {
     assert.strictEqual(get({a: 1}, 'a'), 1)
   })
 
   it('should fetch Object value using key chain', function () {
     assert.strictEqual(get({a: {b: 1}}, ['a', 'b']), 1)
+  })
+
+  it('should fetch Object value using key chain string', function () {
+    assert.strictEqual(get({a: {b: 1}}, 'a.b', {split: true}), 1)
   })
 
   it('should fetch inherited Object value if `inObj` is true', function () {
@@ -34,6 +42,10 @@ describe('get()', function () {
 
   it('should fetch Map value using key chain', function () {
     assert.strictEqual(get(new Map([['one', new Map([['two', 'value']])]]), ['one', 'two']), 'value')
+  })
+
+  it('should fetch Map value using key chain string', function () {
+    assert.strictEqual(get(new Map([['one', new Map([['two', 'value']])]]), 'one.two', {split: true}), 'value')
   })
 
   it('should fetch Set value using single index', function () {

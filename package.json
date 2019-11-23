@@ -30,12 +30,15 @@
     "node": ">=8.3.0"
   },
   "dependencies": {
+    "2": "^3.0.0",
     "arrify": "^2.0.1",
+    "concat-map": "0.0.1",
     "entries-iterator": "^1.6.0",
     "equals": "^1.0.5",
     "is-instance-of": "^1.0.2",
     "otherwise": "^2.0.0",
     "sbo": "^1.1.0",
+    "split-string": "^6.1.0",
     "xfn": "^1.0.0"
   },
   "devDependencies": {

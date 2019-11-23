@@ -28,8 +28,10 @@ The module exports a function (`get()`) that has other functions attached to it 
     * `inObj` (boolean): Whether or not to search inherited properties if `collection` is an Object (i.e. not another recognized type). Defaults to `false`.
     * `loose` (boolean): Whether or not to evaluate keys loosely (as defined by `looselyEquals`). Defaults to `false`.
     * `looselyEquals` (function): A callback that accepts two values and returns `true` if they are to be considered equivalent or `false` otherwise. This argument is only used if `loose` is `true`. If this option is omitted, then the [`equals`](https://www.npmjs.com/package/equals) module is used. This module will, among other things, consider arrays/objects to be equal if they have the same entries.
+    * `numerifyIndexes` (boolean): Set to `true` to convert number-containing key strings to numbers. This is most useful when the `split` option is enabled: if you use `split` to divide a `'key.0'` keychain into `'key'` and `'0'`, enabling this option will result in the `'0'` key being converted to a numeric `0` index. Defaults to `false`.
     * `preferStrict` (boolean): Only applies if `loose` is `true`. If `true`, then strictly-identical keys will be preferred over loosely-equivalent keys. Otherwise, the first loosely-equivalent key found will be used, even if a strictly-identical one comes later. Defaults to `false`.
     * `reverse` (boolean): Set to `true` to use the _last_ matching key instead of the first one. Only applies if `loose` is `true`. Defaults to `false`.
+    * `split` (boolean or object): Set to `true` to parse dot-separated `keychain` strings (e.g. `'key1.key2'`) as separate keys. You can also provide an object of options to be forwarded to the [`split-string`](https://www.npmjs.com/package/split-string) module. Defaults to `false`.
 
 #### Return Values
 
