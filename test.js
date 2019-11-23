@@ -2,7 +2,6 @@
 
 const assert = require('assert')
 const get = require('.')
-const isArrayWith = require('is-array-with')
 
 describe('get()', function () {
   it('should fetch Array value using single index', function () {
@@ -66,12 +65,6 @@ describe('get()', function () {
     assert.strictEqual(get.call({a: 1}, 'a'), 1)
   })
 
-  describe('#any()', function () {
-    it('should fetch Object value using any key', function () {
-      assert.strictEqual(get.any({yes: {sub: 1}}, ['no', ['yes', 'sub']]), 1)
-    })
-  })
-
   describe('#in()', function () {
     it('should fetch inherited Object value', function () {
       class Cls {
@@ -82,12 +75,18 @@ describe('get()', function () {
     })
   })
 
-  describe('#any#in()', function () {
-    it('should fetch inherited Object value using any key', function () {
-      class Cls {
-        get key () { return 'value' }
-      }
-      assert.strictEqual(get.any.in(new Cls(), ['notAKey', 'key']), 'value')
+  describe('#any()', function () {
+    it('should fetch Object value using any key', function () {
+      assert.strictEqual(get.any({yes: {sub: 1}}, ['no', ['yes', 'sub']]), 1)
+    })
+
+    describe('#in()', function () {
+      it('should fetch inherited Object value using any key', function () {
+        class Cls {
+          get key () { return 'value' }
+        }
+        assert.strictEqual(get.any.in(new Cls(), ['notAKey', 'key']), 'value')
+      })
     })
   })
 
@@ -167,11 +166,11 @@ describe('get()', function () {
   describe('#entry()', function () {
     it('should return a Map entry if the key exists', function () {
       const key = ['key']
-      assert(isArrayWith(get.entry(new Map([[key, 'value']]), key), key, 'value'))
+      assert.deepStrictEqual(get.entry(new Map([[key, 'value']]), key), [key, 'value'])
     })
 
     it('should return an Object entry if the key exists', function () {
-      assert(isArrayWith(get.entry({key: 'value'}, 'key'), 'key', 'value'))
+      assert.deepStrictEqual(get.entry({key: 'value'}, 'key'), ['key', 'value'])
     })
 
     it('should return undefined if the Map key does not exist', function () {
@@ -185,16 +184,16 @@ describe('get()', function () {
     it('should return an equivalent Map key if `loose` is true', function () {
       const a = ['key']
       const b = ['key']
-      assert(isArrayWith(get.entry(new Map([[a, 1]]), b, {loose: true}), a, 1))
+      assert.deepStrictEqual(get.entry(new Map([[a, 1]]), b, {loose: true}), [a, 1])
     })
 
     it('should return an equivalent Object key if `loose` is true', function () {
       const obj = {a: 1}
-      assert(isArrayWith(get.entry(obj, 'b', {loose: true, looselyEquals: () => true}), 'a', 1))
+      assert.deepStrictEqual(get.entry(obj, 'b', {loose: true, looselyEquals: () => true}), ['a', 1])
     })
 
     it('should support the bind operator', function () {
-      assert(isArrayWith(get.entry.call({key: 'value'}, 'key'), 'key', 'value'))
+      assert.deepStrictEqual(get.entry.call({key: 'value'}, 'key'), ['key', 'value'])
     })
   })
 })
