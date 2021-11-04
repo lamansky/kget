@@ -1,7 +1,6 @@
 'use strict'
 
 const arrify = require('arrify')
-const concatMap = require('concat-map')
 const entries = require('entries-iterator')
 const equals = require('equals')
 const is = require('is-instance-of')
@@ -34,7 +33,7 @@ module.exports.key = sbo({ignoreThis}, getKey)
 function getByKeyChain (value, keychain, {get = defaultGet, numerifyIndexes, split, ...options} = {}) {
   keychain = arrify(keychain)
   if (split === true) split = {}
-  if (split) keychain = concatMap(keychain, k => typeof k === 'string' ? splitString(k, split) : [k])
+  if (split) keychain = keychain.flatMap(k => typeof k === 'string' ? splitString(k, split) : [k])
   if (numerifyIndexes) {
     keychain = keychain.map(k => {
       const i = toNumber(k, {elseReturn: k})
